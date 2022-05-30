@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const BlogController = require('../controllers/blogController')
-router.post('/addblog' , BlogController.addBlog)
-router.get('/getblog' , BlogController.getBlog )
-router.get('/getallblogs' , BlogController.getAllBlogs)
+const {addBlog , getBlog , getAllBlogs} = require('../controllers/blogController')
+router.post('/addblog' , addBlog)
+router.get('/getblog' , getBlog )
+router.get('/getallblogs' ,getAllBlogs)
 module.exports = router
