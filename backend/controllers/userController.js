@@ -1,7 +1,11 @@
 const mongoose = require('mongoose')
 const UserSchema  = require('../models/userModel')
+const mongodb = require('mongodb')
+const ObjectId = mongodb.ObjectId
 var db = mongoose.connection
-// console.log(db)
+
+
+// Create
 
 const addUser = async (req , res) =>{
     try{
@@ -17,6 +21,8 @@ const addUser = async (req , res) =>{
         res.status(500).json({error:e.message})
     }
 }
+
+// Read
 
 const getUser = async (req , res) =>{
     try{
@@ -38,6 +44,38 @@ const getAllUsers = (req , res) =>{
     })
 }
 
+const getUserById =  async (req , res ) =>{
+    try {
+        // console.log(req.params)
+        const user = await UserSchema.findById(ObjectId(req.params.id))
+        res.status(201).send(user)
+    } catch (e) {
+        res.status(500).json({error:e.message})
+    }
+}
 
 
-module.exports = {addUser , getUser , getAllUsers}
+// Update
+
+const updateUserById = async (req , res) =>{
+    
+    try{
+        await UserSchema.findByIdAndUpdate(req.params.id , req.body)
+        res.status(201).json({message:"Success"})
+    } catch (error){
+        res.status(409).json({ message: error.message});     
+    }
+}
+
+// Delete
+
+const deleteUserById = async (req , res) =>{
+    try {
+        await UserSchema.findByIdAndDelete(req.params.id)
+        res.status(201).json({message:"Successfully deleted the user"})
+    } catch (e) {
+        res.status(409).json({ message: error.message});     
+    }
+}
+
+module.exports = {addUser , getUser , getAllUsers , getUserById , updateUserById , deleteUserById}
