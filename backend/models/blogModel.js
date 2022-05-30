@@ -7,11 +7,8 @@ const BlogSchema = new mongoose.Schema({
     },
     title:String,
     content:String,
-    createdAt:{
-        type:Date,
-        default:Date.now()
-    }
+    
 
-})
+},{timestamps: true,})
 
 module.exports = mongoose.model("Blog" , BlogSchema)

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-
 const UserSchema = new mongoose.Schema({
     userName:{
         type:String,
@@ -16,8 +15,7 @@ const UserSchema = new mongoose.Schema({
         required:true,
     },
     mobileNumber:Number,
-    registrationDate:{
-        type:Date,
-        default:Date.now()
-    }
-})
+    // timestamps: { createdAt: true, updatedAt: true }
+} , {timestamps :true })
+
+module.exports = mongoose.model("User" , UserSchema)
