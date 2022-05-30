@@ -14,8 +14,12 @@ const addUser = async (req , res) =>{
         console.log(user)
         await db.collection('users').insertOne(user).then(()=>{
             console.log('user inserted')
+        }).then(()=>{
+            res.status(201).json({message:'Success'})
+        }).catch(e=>{
+            res.status(400).json({error:e.message})
         })
-        res.status(201).json({message:'Success'})
+        
     }
     catch(e){
         res.status(500).json({error:e.message})
@@ -42,13 +46,18 @@ const getAllUsers = (req , res) =>{
     UserSchema.find({} , function(err, users){
         res.send(users)
     })
+    // res.status(201).json({message:'success'})
 }
 
 const getUserById =  async (req , res ) =>{
     try {
         // console.log(req.params)
-        const user = await UserSchema.findById(ObjectId(req.params.id))
-        res.status(201).send(user)
+        const user = await UserSchema.findById(ObjectId(req.params.id)).then(()=>{
+            res.status(201).send(user)
+        })
+        .catch(e =>{
+            res.status(400).json({error:e.message})
+        })
     } catch (e) {
         res.status(500).json({error:e.message})
     }
@@ -60,10 +69,14 @@ const getUserById =  async (req , res ) =>{
 const updateUserById = async (req , res) =>{
     
     try{
-        await UserSchema.findByIdAndUpdate(req.params.id , req.body)
-        res.status(201).json({message:"Success"})
+        await UserSchema.findByIdAndUpdate(req.params.id , req.body).then(()=>{
+            res.status(201).json({message:"Success"})
+        }).catch(e =>{
+            res.status(400).json({ message: e.message});     
+        })
+        
     } catch (error){
-        res.status(409).json({ message: error.message});     
+        res.status(500).json({ message: error.message});     
     }
 }
 
@@ -71,10 +84,14 @@ const updateUserById = async (req , res) =>{
 
 const deleteUserById = async (req , res) =>{
     try {
-        await UserSchema.findByIdAndDelete(req.params.id)
-        res.status(201).json({message:"Successfully deleted the user"})
+        await UserSchema.findByIdAndDelete(req.params.id).then(()=>{
+            res.status(201).json({message:"Successfully deleted the user"})
+        }).catch(e=>{
+            res.status(400).json({ message: error.message});   
+        })
+        
     } catch (e) {
-        res.status(409).json({ message: error.message});     
+        res.status(500).json({ message: error.message});     
     }
 }
 
