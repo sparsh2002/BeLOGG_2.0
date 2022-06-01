@@ -1,0 +1,12 @@
+{
+  _id: new ObjectId("6296cd401b08f1f406e92410"),
+  userName: 'fuggi123',
+  firstName: 'fuggi',
+  lastName: 'fuli',
+  email: 'fuggi@gmail.com',
+  password: '$2b$10$jQbt513cN4HIPvc5Lp/51.i5QN/ZSsZByM8b8LHg5RW6NxAToWcQu',
+  mobileNumber: 9685233329,
+  createdAt: 2022-06-01T02:21:52.916Z,
+  updatedAt: 2022-06-01T02:21:52.916Z,
+  __v: 0
+}

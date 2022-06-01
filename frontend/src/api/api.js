@@ -16,3 +16,16 @@ export const loginPost = (user) =>{
     axios.post('/api/auth/login' , user)
     return "success"
 }
+
+export const checkUser = () =>{
+   axios.get('/api/auth/checkuser').then( res =>{
+       console.log(res)
+   }).catch(e =>console.log(e))
+   
+}
+
+export const logoutGet = () =>{
+    axios.get('/api/auth/logout').then( res =>{
+        console.log(res)
+    }).catch(e =>console.log(e))
+}
