@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
 import { signupPost } from '../../api/api'
+import { useNavigate} from 'react-router-dom'
 
 function SignUp() {
+const navigate = useNavigate()
 const [email, setemail] = useState('')
 const [password , setpassword] = useState('')
 const [emailerror , setemailerror] = useState('')
@@ -23,7 +25,10 @@ const handleSubmit = async (e) =>{
   }
   // console.log(user)
   const res = await signupPost(user)
-  console.log(res)
+  if(res==="success"){
+    return navigate("/")
+  }
+
 }
   return (
     // <div>

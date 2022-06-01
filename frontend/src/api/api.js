@@ -6,8 +6,13 @@ export const addUser = async (user) => {
 }
 
 
-export const signupPost = async (user) =>{
-    console.log(user)
+export const signupPost = (user) =>{
+    // console.log(user)
     axios.post('/api/auth/signup' , user)
+    return "success"
+}
+
+export const loginPost = (user) =>{
+    axios.post('/api/auth/login' , user)
     return "success"
 }
