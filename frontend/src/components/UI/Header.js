@@ -7,7 +7,7 @@ function Header() {
             <h1><a href="/">BeLOGG</a></h1>
             <ul>
             <li><a href="/login">Log in</a></li>
-            <li><a href="/signup" class="btn">Sign up</a></li>
+            <li><a href="/signup" className="btn">Sign up</a></li>
             </ul>
         </nav>
     </div>
