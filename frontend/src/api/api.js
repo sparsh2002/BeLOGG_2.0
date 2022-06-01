@@ -1,5 +1,26 @@
 import axios from 'axios'
 
+
+// getBlogs for current user
+
+export const getBlogsForCurrentUser =(id) =>{
+    if(id){
+        axios.get(`/api/blog/getallblogsforcurrrentuser/${id}`).then((res)=>{
+            // console.log(res.data)
+            return res.data
+        }).catch(e =>{
+            console.log('failed to fetch blogs')
+            // console.log(e)
+        })
+        
+    }
+    else{
+        return "login first"
+    }
+}
+
+
+// User
 export const addUser = async (user) => {
     console.log(user)
     return await axios.post(`api/user/adduser`, user);

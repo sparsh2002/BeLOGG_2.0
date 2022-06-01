@@ -39,6 +39,27 @@ const getBlog = async (req , res) =>{
     
 }
 
+const getAllBlogsForCurrentUser = async(req , res) =>{
+    // console.log(req.params)
+    // const id = req.cookies.user._id
+    // console.log()
+    try {
+        // await BlogSchema.find({"authorId": req.body.id})
+        await BlogSchema.find({"authorId": req.params.id})
+
+        .then(
+            (doc)=>{
+                res.status(201).send(doc)
+
+                // res.status(201).json({message:'Success'})
+            } 
+        ).catch(e =>{
+            res.status(400).json({error:e.message})
+        })
+    } catch (e) {
+        res.status(500).json({error:e.message})
+    }
+}
 
 const getAllBlogs = async (req , res)=>{
     try {
@@ -101,5 +122,5 @@ const deleteBlogById = async (req , res) =>{
         res.status(500).json({error:e.message})
     }
 }
-module.exports = {addBlog , getBlog , getAllBlogs , getCommentsForBlogs ,updateBlogById , deleteBlogById}
+module.exports = {addBlog , getBlog , getAllBlogs , getAllBlogsForCurrentUser , getCommentsForBlogs ,updateBlogById , deleteBlogById}
 
