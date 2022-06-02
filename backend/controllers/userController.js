@@ -49,18 +49,27 @@ const getAllUsers = (req , res) =>{
     // res.status(201).json({message:'success'})
 }
 
+// const getUserById =  async (req , res ) =>{
+//     try {
+//         // console.log(req.params)
+//         const user = await UserSchema.findById(ObjectId(req.params.id)).then(()=>{
+//             console.log(user)
+//             res.status(201).send(user)
+//         })
+//         .catch(e =>{
+//             res.status(400).json({error:e.message})
+//         })
+//     } catch (e) {
+//         res.status(500).json({error:e.message})
+//     }
+// }
 const getUserById =  async (req , res ) =>{
-    try {
-        // console.log(req.params)
-        const user = await UserSchema.findById(ObjectId(req.params.id)).then(()=>{
-            res.status(201).send(user)
-        })
-        .catch(e =>{
+    
+        await UserSchema.findById(ObjectId(req.params.id))
+        .then((user)=> res.status(201).send(user)).catch(e=>{
             res.status(400).json({error:e.message})
         })
-    } catch (e) {
-        res.status(500).json({error:e.message})
-    }
+        // res.status(201).json({message:"success"})
 }
 
 

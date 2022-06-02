@@ -8,6 +8,7 @@ import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
 import BlogComponent from './BlogComponent';
 import { useCookies } from "react-cookie";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 function Home() {
   const [blogs, setblogs] = useState([])
   const [cookies, setCookie] = useCookies();
@@ -15,7 +16,7 @@ function Home() {
   const id = user?._id
   useEffect(() => {
     axios.get(`/api/blog/getallblogs`).then((res)=>{
-      setblogs(res.data)
+      setblogs(res.data.reverse())
     }).catch(e =>{
         console.log('failed to fetch blogs')
         // console.log(e)
@@ -29,26 +30,26 @@ function Home() {
             <Grid container display ='flex' flexDirection='column' style ={{marginTop:'20vh'}}
             >
               <Grid item style={{marginBottom:40}} >
-                <HomeOutlinedIcon />
+                <HomeOutlinedIcon fontSize='large' />
               </Grid>
               <Grid item style={{marginBottom:40}}>
-                <NotificationsNoneOutlinedIcon />
+                <NotificationsNoneOutlinedIcon fontSize='large' />
               </Grid>
               <Grid item style={{marginBottom:40}}>
-                <BookmarksOutlinedIcon />
+                <Link to='/blog'><BookmarksOutlinedIcon fontSize='large' /></Link>
               </Grid>
               <Grid item style={{marginBottom:40}}>
-                <ArticleOutlinedIcon />
+                <ArticleOutlinedIcon fontSize='large' />
               </Grid>
               <br />
               <Grid item style={{marginBottom:40}}>
-                <RateReviewOutlinedIcon />
+                <Link to='/addblog'><RateReviewOutlinedIcon fontSize='large' /></Link>
               </Grid>
             </Grid>
           </Grid>
         <Grid item xs = {7}>
             {
-              blogs?.map(blog => <div style ={{margin:'10px 0px'}}>
+              blogs?.map((blog , key) => <div key={key} style ={{margin:'10px 0px'}}>
                 <BlogComponent blog={blog} />
               </div>)
             }

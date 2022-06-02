@@ -50,3 +50,9 @@ export const logoutGet = () =>{
         console.log(res)
     }).catch(e =>console.log(e))
 }
+
+
+export const addblog =(blog) =>{
+    axios.post('/api/blog/addblog' , blog)
+    return "success"
+}

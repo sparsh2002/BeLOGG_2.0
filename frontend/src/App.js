@@ -10,6 +10,7 @@ import Home from './components/Home';
 import Header from "./components/UI/Header";
 import {checkUser} from './api/api'
 import {useEffect} from 'react'
+import Addblog from "./components/Addblog";
 function App() {
   
   useEffect(() => {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/addblog" element={<Addblog />} />
       </Routes>
     </BrowserRouter>
     </div>

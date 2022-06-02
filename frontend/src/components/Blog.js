@@ -2,6 +2,7 @@ import React , {useState , useEffect} from 'react'
 import { getBlogsForCurrentUser } from '../api/api'
 import { useCookies } from "react-cookie";
 import axios from 'axios';
+import parse from 'html-react-parser';
 function Blog() {
   const [blogs, setblogs] = useState([])
   const [cookies, setCookie] = useCookies();
@@ -15,20 +16,22 @@ function Blog() {
         // console.log(e)
     })
   }, [])
-  // console.log(blogs)
   return (
     <>
     <div>
-        This is the Blogg Page
+       <h2> These are your blogs</h2>
     </div>
     <br></br>
     {
       blogs?.map((blog , key) => 
       <div key={key}>
-        <p>Blog Id: {blog._id}</p>
-        <p>Author Id :{blog.authorId}</p>
-        <p>Title: {blog.title}</p>
-        <p>Content: {blog.content}</p>
+        <p><span style={{fontWeight:900}}>Blog Id:</span> {blog._id}</p>
+        <br />
+        <p><span style={{fontWeight:900}} >Author Id </span>:{blog.authorId}</p>
+        <br />
+        <p><span style={{fontWeight:900}} >Title: </span>{blog.title}</p>
+        <br />
+        <p><span style={{fontWeight:900}} >Content: </span>{parse(blog.content)}</p>
         <br />
       </div>)
     }
