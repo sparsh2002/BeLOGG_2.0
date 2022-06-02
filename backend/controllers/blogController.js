@@ -61,15 +61,22 @@ const getAllBlogsForCurrentUser = async(req , res) =>{
     }
 }
 
-const getAllBlogs = async (req , res)=>{
-    try {
-        await BlogSchema.find({} , function(err, blogs){
+// const getAllBlogs = async (req , res)=>{
+//     try {
+//         await BlogSchema.find({} , function(err, blogs){
+//             res.send(blogs)
+//         })
+//     } catch (e) {
+//         res.status(500).json({error:e.message})
+//     }
+// }
+const getAllBlogs = (req , res)=>{
+    
+    BlogSchema.find({} , function(err, blogs){
             res.send(blogs)
-        })
-    } catch (error) {
-        res.status(500).json({error:e.message})
-    }
+    })
 }
+
 
 const getCommentsForBlogs = async (req , res) =>{
     try {

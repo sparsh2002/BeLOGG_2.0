@@ -1,12 +1,26 @@
-import React , {useEffect} from 'react'
+import React , {useEffect , useState} from 'react'
 import Grid from '@mui/material/Grid'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import BookmarksOutlinedIcon from '@mui/icons-material/BookmarksOutlined';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
+import BlogComponent from './BlogComponent';
+import { useCookies } from "react-cookie";
+import axios from 'axios';
 function Home() {
-
+  const [blogs, setblogs] = useState([])
+  const [cookies, setCookie] = useCookies();
+  const {user , jwt} = cookies
+  const id = user?._id
+  useEffect(() => {
+    axios.get(`/api/blog/getallblogs`).then((res)=>{
+      setblogs(res.data)
+    }).catch(e =>{
+        console.log('failed to fetch blogs')
+        // console.log(e)
+    })
+  }, [])
   return (
     <>
     <Grid container spacing = {2}  flexDirection='row' height='90vh'>
@@ -33,7 +47,11 @@ function Home() {
             </Grid>
           </Grid>
         <Grid item xs = {7}>
-        Item 2
+            {
+              blogs?.map(blog => <div style ={{margin:'10px 0px'}}>
+                <BlogComponent blog={blog} />
+              </div>)
+            }
         </Grid>
         <Grid item xs = {4}>
         Item 3
