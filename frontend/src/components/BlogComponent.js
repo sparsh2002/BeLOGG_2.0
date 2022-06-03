@@ -4,12 +4,12 @@ import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
 import axios from 'axios'
 import parse from 'html-react-parser';
 import { addComment } from '../api/api';
-import { useCookies } from "react-cookie";
 import ReactTimeAgo from "react-time-ago";
 import profileImg from '../assets/images/profile.jpeg'
+import { selectUser } from "../feature/userSlice";
+import {  useSelector } from "react-redux";
 function BlogComponent({blog}) {
   const [user , setuser] = useState()
-  const [cookies, setCookie] = useCookies();
   const [comment , setcomment] = useState()
   const [allcomments , setAllComments] = useState([])
   function LastSeen({ date }) {
@@ -19,9 +19,10 @@ function BlogComponent({blog}) {
       </div>
     );
   }
+  const currentuser = useSelector(selectUser);
   const postComment =() =>{
     const data = {
-      authorId : cookies.user._id , 
+      authorId : currentuser._id , 
       title:'',
       blogId : blog._id,
       content : comment,

@@ -3,14 +3,18 @@ import '../../../src/styles.css'
 import { useCookies } from "react-cookie";
 import { logoutGet } from '../../api/api';
 import { useNavigate } from 'react-router-dom';
+import { logout, selectUser } from "../../feature/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 function Header() {
-  const [cookies, setCookie] = useCookies();
-  const {user , jwt} = cookies
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  // const [cookies, setCookie] = useCookies();
+  // const {user , jwt} = cookies
   const navigate = useNavigate()
   const handleLogout = (e) =>{
     e.preventDefault()
     logoutGet()
-    // window.location.href ="/"
+    dispatch(logout());
     return navigate("/login")
   }
   

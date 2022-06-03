@@ -11,8 +11,26 @@ import Header from "./components/UI/Header";
 import {checkUser} from './api/api'
 import {useEffect} from 'react'
 import Addblog from "./components/Addblog";
+import { useCookies } from "react-cookie";
+// redux
+import { login, selectUser } from "./feature/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 function App() {
-  
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+  const [cookies, setCookie] = useCookies();
+  useEffect(() => {
+    if(cookies.user){
+      dispatch(
+        login({
+          _id:cookies.user._id,
+          userName: cookies.user.userName,
+          email: cookies.user.email
+        })
+      )
+    }
+  }, [dispatch , cookies])
   useEffect(() => {
     checkUser()
   }, [])

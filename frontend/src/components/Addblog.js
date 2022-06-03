@@ -3,8 +3,9 @@ import 'react-quill/dist/quill.snow.css';
 import ReactQuill from 'react-quill'; 
 import {Button, TextField} from '@mui/material'
 import {addblog} from '../api/api'
-import { useCookies } from "react-cookie";
 import {useNavigate} from 'react-router-dom'
+import { selectUser } from "../feature/userSlice";
+import {  useSelector } from "react-redux";
 function Addblog() {
   const [title , setTitle] = useState('')
   const [content, setContent] = useState('')
@@ -12,12 +13,10 @@ function Addblog() {
     setContent(value)
   }
   let navigate = useNavigate()
-  const [cookies, setCookie] = useCookies();
-  const {user , jwt} = cookies
-  const id = user?._id
+  const user = useSelector(selectUser);
   const handleSubmit =() =>{
     const blog ={
-      authorId: id,
+      authorId: user._id,
       title:title,
       content:content
     }
