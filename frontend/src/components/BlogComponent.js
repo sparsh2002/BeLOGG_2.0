@@ -1,5 +1,6 @@
 import React , {useEffect , useState} from 'react'
-import {Card, CardContent ,Avatar, Box, Typography , Divider} from '@mui/material'
+import {Card, CardContent ,Avatar, Box, Typography , Divider, TextField , FormControl , Form , InputLabel , Input , InputAdornment} from '@mui/material'
+import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
 import axios from 'axios'
 import parse from 'html-react-parser';
 import ReactTimeAgo from "react-time-ago";
@@ -34,6 +35,19 @@ function BlogComponent({blog}) {
             <Box>
                 <Typography variant="h5">{blog?.title}</Typography>
                 <Typography>{parse(blog?.content)}</Typography>
+            </Box>
+            <Box>
+            <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+              {/* <InputLabel htmlFor="standard-adornment-amount">Amount</InputLabel> */}
+              <Input
+                id="standard-adornment-amount"
+                // value={}
+                // onChange={}
+                placeholder='write a comment'
+                startAdornment={<InputAdornment position="start"><ModeCommentOutlinedIcon  fontSize='medium'/></InputAdornment>}
+              />
+            </FormControl>
+              
             </Box>
         </Box>
     </>
