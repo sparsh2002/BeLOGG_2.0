@@ -15,13 +15,18 @@ function Home() {
   const [cookies, setCookie] = useCookies();
   const {user , jwt} = cookies
   const id = user?._id
+  // useEffect(() => {
+  //   axios.get(`/api/blog/getallblogs`).then((res)=>{
+  //     setblogs(res.data.reverse())
+  //   }).catch(e =>{
+  //       console.log('failed to fetch blogs')
+  //       // console.log(e)
+  //   })
+  // }, [])
   useEffect(() => {
-    axios.get(`/api/blog/getallblogs`).then((res)=>{
-      setblogs(res.data.reverse())
-    }).catch(e =>{
-        console.log('failed to fetch blogs')
-        // console.log(e)
-    })
+    axios.get('/api/blog/')
+    .then(res => setblogs(res.data.reverse()))
+    .catch(e => console.log(e))
   }, [])
   return (
     <>

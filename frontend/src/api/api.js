@@ -56,3 +56,9 @@ export const addblog =(blog) =>{
     axios.post('/api/blog/addblog' , blog)
     return "success"
 }
+
+export const addComment = (comment) =>{
+    // console.log(comment)
+    axios.post('/api/comment/addcomment' , comment)
+    return "success"
+}
