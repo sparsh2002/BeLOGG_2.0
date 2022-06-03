@@ -9,6 +9,7 @@ import BlogComponent from './BlogComponent';
 import { useCookies } from "react-cookie";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Sidebar from './Sidebar';
 function Home() {
   const [blogs, setblogs] = useState([])
   const [cookies, setCookie] = useCookies();
@@ -55,7 +56,7 @@ function Home() {
             }
         </Grid>
         <Grid item xs = {4}>
-        Item 3
+            <Sidebar />
         </Grid>
     </Grid>
     </>
