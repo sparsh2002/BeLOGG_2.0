@@ -92,11 +92,6 @@ function BlogComponent({blog}) {
               }
             </Box>
         </Box>
-        {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleCloseAlert}>
-        <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
-          Comment Post Successfully
-        </Alert>
-      </Snackbar> */}
     </>
   )
 }
