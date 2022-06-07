@@ -1,7 +1,12 @@
 import React, {useState} from 'react'
 import { signupPost } from '../../api/api'
 import { useNavigate} from 'react-router-dom'
-
+import {loginPost} from '../../api/api'
+import Header from '../UI/Header'
+import { useCookies } from "react-cookie";
+// redux
+import { login, selectUser } from "../../feature/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 function SignUp() {
 const navigate = useNavigate()
 const [email, setemail] = useState('')
@@ -12,7 +17,8 @@ const [username , setusername] = useState('')
 const [mobilenumber, setmobilenumber] = useState(0)
 const [firstname , setfirstname] = useState('')
 const [lastname , setlastname] = useState('')
-
+const dispatch = useDispatch();
+const [cookies, setCookie] = useCookies();
 const handleSubmit = async (e) =>{
   e.preventDefault();
   const user = {
@@ -23,15 +29,24 @@ const handleSubmit = async (e) =>{
     password:password,
     mobileNumber:mobilenumber
   }
-  // console.log(user)
-  const res = await signupPost(user)
-  if(res==="success"){
-    return navigate("/")
+  const res1 = await signupPost(user)
+  if(res1==="success"){
+    const res2 = await loginPost(user)
+
+    if(res2==="success"){
+      dispatch(
+        login({
+          email:user.email
+        })
+      )
+      return navigate("/")
+    }
   }
 
 }
   return (
-    // <div>
+    <div>
+
         <form onSubmit={(e) =>handleSubmit (e)}>
             <h2>Sign up</h2>
             <label htmlFor='username'>Username</label>
@@ -76,7 +91,7 @@ const handleSubmit = async (e) =>{
 
             <button>Sign up</button>
         </form>
-    // </div>
+    </div>
   )
 }
 

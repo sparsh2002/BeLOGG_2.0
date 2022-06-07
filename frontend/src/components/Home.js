@@ -6,23 +6,13 @@ import BookmarksOutlinedIcon from '@mui/icons-material/BookmarksOutlined';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
 import BlogComponent from './BlogComponent';
-import { useCookies } from "react-cookie";
+// import { useCookies } from "react-cookie";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
 function Home() {
   const [blogs, setblogs] = useState([])
-  const [cookies, setCookie] = useCookies();
-  const {user , jwt} = cookies
-  const id = user?._id
-  // useEffect(() => {
-  //   axios.get(`/api/blog/getallblogs`).then((res)=>{
-  //     setblogs(res.data.reverse())
-  //   }).catch(e =>{
-  //       console.log('failed to fetch blogs')
-  //       // console.log(e)
-  //   })
-  // }, [])
+  
   useEffect(() => {
     axios.get('/api/blog/')
     .then(res => setblogs(res.data.reverse()))

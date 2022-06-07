@@ -8,6 +8,7 @@ import ReactTimeAgo from "react-time-ago";
 import profileImg from '../assets/images/profile.jpeg'
 import { selectUser } from "../feature/userSlice";
 import {  useSelector } from "react-redux";
+import {useCookies} from 'react-cookie'
 function BlogComponent({blog}) {
   const [user , setuser] = useState()
   const [comment , setcomment] = useState()
@@ -20,15 +21,17 @@ function BlogComponent({blog}) {
     );
   }
   const currentuser = useSelector(selectUser);
+  const [cookies , setCookie]  = useCookies()
   const postComment =() =>{
     const data = {
-      authorId : currentuser._id , 
+      authorId : cookies.user._id , 
       title:'',
       blogId : blog._id,
       content : comment,
     }
     addComment(data)
     setcomment('')
+    window.location.reload()
   }
  
   
@@ -89,6 +92,11 @@ function BlogComponent({blog}) {
               }
             </Box>
         </Box>
+        {/* <Snackbar open={open} autoHideDuration={6000} onClose={handleCloseAlert}>
+        <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
+          Comment Post Successfully
+        </Alert>
+      </Snackbar> */}
     </>
   )
 }

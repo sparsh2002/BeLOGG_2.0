@@ -6,6 +6,7 @@ import {addblog} from '../api/api'
 import {useNavigate} from 'react-router-dom'
 import { selectUser } from "../feature/userSlice";
 import {  useSelector } from "react-redux";
+import Header from './UI/Header';
 function Addblog() {
   const [title , setTitle] = useState('')
   const [content, setContent] = useState('')

@@ -54,6 +54,7 @@ const singupPost = async (req , res) =>{
     const user = await UserSchema.create(req.body);
     const token = createToken(user._id);
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+    res.cookie('user', user, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(201).json({ user: user._id });
   }
   catch(err) {
@@ -74,6 +75,7 @@ const loginPost = async (req , res) =>{
     const user = await UserSchema.login(email, password);
     const token = createToken(user._id);
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+    res.cookie('user', user, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(200).json({ user: user._id });
   } 
   catch (err) {

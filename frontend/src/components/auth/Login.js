@@ -3,10 +3,18 @@ import React
 from 'react'
 import { useNavigate} from 'react-router-dom'
 import {loginPost} from '../../api/api'
+import Header from '../UI/Header'
+import { useCookies } from "react-cookie";
+// redux
+import { login, selectUser } from "../../feature/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 function Login() {
   let navigate = useNavigate()
   const [email, setemail] = useState('')
   const [password, setpassword] = useState('')
+  const dispatch = useDispatch();
+  const [cookies, setCookie] = useCookies();
+  
   const handleSubmit = async () =>{
     const user = {
       email:email,
@@ -14,6 +22,11 @@ function Login() {
     }
     const res = await loginPost(user)
     if(res==="success"){
+      dispatch(
+        login({
+          email:user.email
+        })
+      )
       return navigate("/")
     }
   }
